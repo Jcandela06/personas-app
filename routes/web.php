@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ComunaController;
 use App\Http\Controllers\MunicipioController;
@@ -9,6 +10,20 @@ use App\Http\Controllers\PaisController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
+
+Route::middleware('auth')->group(function () {
 
 //RUTAS COMUNA
 
@@ -46,3 +61,5 @@ Route::get('/pais/create', [PaisController::class, 'create'])->name('pais.create
 Route::delete('/paises/{pais}', [PaisController::class, 'destroy'])->name('pais.destroy');
 Route::put('/paises/{pais}', [PaisController::class, 'update'])->name('pais.update');
 Route::get('/paises/{pais}/edit', [PaisController::class, 'edit'])->name('pais.edit');
+
+});
