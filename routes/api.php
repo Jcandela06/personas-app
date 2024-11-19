@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\api\ComunaController; 
+use App\Http\Controllers\api\ComunaController;
+use App\Http\Controllers\api\MunicipioController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -15,4 +16,8 @@ Route::get('/comunas/{comuna}', [ComunaController::class, 'show'])->name('comuna
 Route::put('/comunas/{comuna}', [ComunaController::class, 'update'])->name('comunas.update');
 
 
-Route::get('/municipios', [ComunaController::class, 'index'])->name('municipios');
+Route::get('/municipios', [MunicipioController::class, 'index'])->name('municipios');
+Route::post('/municipios', [MunicipioController::class, 'store'])->name('municipios.store');
+Route::delete('/municipios/{municipio}', [MunicipioController::class, 'destroy'])->name('municipios.destroy');
+Route::get('/municipios/{municipio}', [MunicipioController::class, 'show'])->name('municipios.show');
+Route::put('/municipios/{municipio}', [MunicipioController::class, 'update'])->name('municipios.update');
