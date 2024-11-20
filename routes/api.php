@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\ComunaController;
 use App\Http\Controllers\api\MunicipioController;
 use App\Http\Controllers\api\DepartamentoController;
+use App\Http\Controllers\api\PaisController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -24,3 +25,5 @@ Route::get('/municipios/{municipio}', [MunicipioController::class, 'show'])->nam
 Route::put('/municipios/{municipio}', [MunicipioController::class, 'update'])->name('municipios.update');
 
 Route::apiResource('departamentos', DepartamentoController::class);
+
+Route::apiResource('paises', PaisController::class);
